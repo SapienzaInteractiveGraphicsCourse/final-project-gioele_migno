@@ -9,6 +9,7 @@ import { X_Bot } from './X_Bot.js'
 import { Environment } from './Environment.js'
 
 import { Tween_spline } from './Tween_spline.js'
+import { X_Bot_Walk_Animation } from './X_bot_Walk_Animation.js'
 
 
 import Stats from './jsm/libs/stats.module.js';
@@ -24,7 +25,8 @@ let camera, scene, renderer, stats;
 const clock = new THREE.Clock();
 const utils = new Utils();
 
-const X_BOT_PATH_MODEL = './models/x_bot_T_pose.glb';
+const X_BOT_PATH_MODEL = './models/x_bot_rotated.glb';//'./models/x_bot_T_pose.glb';
+
 const ENV_PATH_MODEL = './models/cube.glb';
 
 let mixer;
@@ -49,72 +51,65 @@ async function load_models(){
 
 }
 
-function tween_test(){
-    // x0 -> x1 in 5sec
-    const coords = {x: 0, y: 0, z: 0} // Start at (0, 0)
-    const tween_1 = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
-        .to({x: 300, y: 200, z :400}, 5000) // Move to (300, 200) in 1 second.
-        .easing(TWEEN.Easing.Quadratic.Out) // Use an easing function to make the animation smooth.
-        .onUpdate((object) => {
-            // Called after tween.js updates 'coords'.
-            // Move 'box' to the position described by 'coords' with a CSS translation.
-            x_bot.model.position.set(object.x, object.y, object.z);
-        })
-       // .start() // Start the tween immediately.
-       // .repeat(Infinity)
-    
-    //x1->x2 in 8sec
-    const tween_2 = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
-    .to({x: -300, y: -200, z :-40}, 8000) // Move to (300, 200) in 1 second.
-    .easing(TWEEN.Easing.Quadratic.Out) // Use an easing function to make the animation smooth.
-    .onUpdate((object) => {
-        // Called after tween.js updates 'coords'.
-        // Move 'box' to the position described by 'coords' with a CSS translation.
-        x_bot.model.position.set(object.x, object.y, object.z);
-    })
-    
-    //x2->x3 in 16sec
-    const tween_3 = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
-    .to({x: 0, y: 0, z :0}, 16000) // Move to (300, 200) in 1 second.
-    .easing(TWEEN.Easing.Quadratic.Out) // Use an easing function to make the animation smooth.
-    .onUpdate((object) => {
-        // Called after tween.js updates 'coords'.
-        // Move 'box' to the position described by 'coords' with a CSS translation.
-        x_bot.model.position.set(object.x, object.y, object.z);
-    })
-    //.start() // Start the tween immediately.
-    //.repeat(Infinity)
 
-    
-    tween_1.chain(tween_2)
-    tween_2.chain(tween_3)
-    //tween_3.chain(tween_1)
-    tween_1.start();
-}
+
+
+
+let start_x;
+let start_z;
 
 let tween_spline;
 
-function test_tween_spline(){
-    let times = [0, 5000, 12000, 16000];
-    let values = [
-        {x: 0, y: 0, z :0},
-        {x: 400, y: 220, z :400},
-        {x: -500, y: 220, z :-550},
-        {x: 0, y: 0, z :0}
-    ]
-
-    let func_handler = (object) => {
-        // Called after tween.js updates 'coords'.
-        // Move 'box' to the position described by 'coords' with a CSS translation.
-        x_bot.model.position.set(object.x, object.y, object.z);
-    }
-
-  
-        tween_spline = new Tween_spline(times, values, func_handler, TWEEN.Easing.Quadratic.Out, TWEEN.Interpolation.CatmullRom);
-        tween_spline.init(true);
-        tween_spline.start();
-
+let obj;
+function test(){
+    obj = new X_Bot_Walk_Animation(x_bot);
+    obj.init();
+    obj.start();
 }
+ function test_tween_spline(){
+ }
+
+//     let times = [0, 500, 1000, 1500, 2000];
+//     let values = [
+//         {x: 2.38, y: 1.34, z:0}, 
+// 		{x: 1.28, y: -2.53, z:2}, 
+// 		{x: 0.32, y: 1.45, z:1.5}, 
+// 		{x: 1.72, y: -1.60, z:1.7}, 
+// 		{x: 2.37, y: 1.34, z:2}];
+
+
+//         // {x: 0.7596, z: 99.43753051757812, y:0}, 
+// 		// {x: -0.3358, z: 95.5666275024414, y:2}, 
+// 		// {x: -1.2901, z: 99.54318237304688, y:1.5}, 
+// 		// {x: 0.1066, z: 96.48882293701172, y:1.7}, 
+// 		// {x: 0.7595, z: 99.43751525878906, y:2}];
+
+//         // let values = [
+//         //     {x: 2.3769922256469727, z: 99.43753051757812, y:83.62864685058594}, 
+//         //     {x: 1.2815183401107788, z: 95.5666275024414, y:127.48887634277344}, 
+//         //     {x: 0.3272812068462372, z: 99.54318237304688, y:169.3924560546875}, 
+//         //     {x: 1.7239420413970947, z: 96.48882293701172, y:209.16741943359375}, 
+//         //     {x: 2.376992702484131, z: 99.43751525878906, y:251.5056915283203}];
+
+//         console.log(JSON.stringify(x_bot.model.position))
+//         console.log(JSON.stringify(x_bot.parts.hips.position))
+    
+//         //.set(0,0,-104);
+//         let func_handler = (object) => {
+//         // Called after tween.js updates 'coords'.
+//         // Move 'box' to the position described by 'coords' with a CSS translation.
+//         let old_y = x_bot.parts.hips.position.z; 
+//        x_bot.parts.hips.position.set(object.x,  start_z + object.y,old_y +object.z);//position.set(object.x, object.y, object.z);
+//        //x_bot.parts.hips.position.set(object.x, object.y, object.z);//position.set(object.x, object.y, object.z);
+
+//     }
+
+//     start_z = x_bot.parts.hips.position.z;
+//         tween_spline = new Tween_spline(times, values, func_handler, TWEEN.Easing.Quadratic.Out, TWEEN.Interpolation.CatmullRom);
+//         tween_spline.init(true);
+//         tween_spline.start();
+
+// }
 
 function init() {
 
@@ -135,6 +130,9 @@ function init() {
 
     // scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
+    const axesHelper = new THREE.AxesHelper( 500 );
+    axesHelper.position.set(-500, 0, -500)
+    scene.add( axesHelper );
     // ground
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
     mesh.rotation.x = - Math.PI / 2;
@@ -147,23 +145,53 @@ function init() {
     scene.add( grid );
 
 
+
     x_bot.model.scale.x = 1;
     x_bot.model.scale.y = 1;
     x_bot.model.scale.z = 1;
 
+    console.log(x_bot.parts.hips.position.y)
     x_bot.materials.surface.material = new THREE.MeshPhongMaterial({color: 0xd6d6d6});  // greenish blue
     x_bot.materials.joints.material = new THREE.MeshPhongMaterial({color: 0x010014});
     
-    test_tween_spline();
+
+    //x_bot.parts.hips.add( new THREE.AxesHelper( 500 ));
+    
+    console.log(utils.dumpObject(x_bot.scene).join('\n'));
+
+    test();
+    //test_tween_spline();
 
 
-    scene.add(x_bot.model)
+    const axesHelper2 = new THREE.AxesHelper( 500 );
+    axesHelper2.position.set(-200, 0, -200)
+    x_bot.scene.add( axesHelper2 );
 
 
+    // scene.add(x_bot.model)
+    scene.add(x_bot.scene)
+    //console.log(x_bot.scene.position)
+
+    let node;
+    let axes;
+
+    node = x_bot.model;
+    axes = new THREE.AxesHelper(300);
+    axes.material.depthTest = false;
+    axes.renderOrder = 1;
+    node.add(axes);
 
 
-    //console.log(utils.dumpObject(env.model).join('\n'));
-
+    node = x_bot.parts.hips;
+    axes = new THREE.AxesHelper(50);
+    axes.material.depthTest = false;
+    axes.renderOrder = 1;
+    node.add(axes);
+    //x_bot.parts.hips.position.set(80,80,80);//2.37, -83.62, 99.43);
+    //console.log(x_bot.parts.hips.position)
+    //x_bot.model.position.set(100, 100, 100)
+    //x_bot.parts.hips.position.set(100, 100, 100)
+    
     const color = 0xFFFFFF;
     const intensity = 0.5;
     
@@ -221,8 +249,10 @@ function animate() {
 
     stats.update();
 
-    
-    tween_spline.update();
+    //console.log(x_bot.parts.hips.position.y)
+    ////tween_spline.update();
+    obj.update();
+
 
 }
 
