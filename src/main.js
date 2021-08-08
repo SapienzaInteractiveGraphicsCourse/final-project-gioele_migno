@@ -6,6 +6,8 @@ import * as TWEEN from '../build/tween.esm.js';
 import { Utils } from './Utils.js'
 
 import { X_Bot } from './X_Bot.js'
+import { Linear_animation } from './Linear_animation.js'
+
 import { Environment } from './Environment.js'
 
 import { Tween_spline } from './Tween_spline.js'
@@ -110,6 +112,8 @@ function test(){
 //         tween_spline.start();
 
 // }
+let z;
+let linear;
 
 function init() {
 
@@ -157,7 +161,7 @@ function init() {
 
     //x_bot.parts.hips.add( new THREE.AxesHelper( 500 ));
     
-    console.log(utils.dumpObject(x_bot.scene).join('\n'));
+    //console.log(utils.dumpObject(x_bot.scene).join('\n'));
 
     test();
     //test_tween_spline();
@@ -223,7 +227,11 @@ function init() {
 
     //console.log(utils.dumpObject(scene).join('\n'));
 
-
+    
+    z = 0;
+    linear = new Linear_animation();
+    linear.init(83, x_bot.parts.hips.position, 'z');
+    linear.start();
 }
 
 function onWindowResize() {
@@ -235,7 +243,6 @@ function onWindowResize() {
 
 }
 
-//
 
 function animate() {
 
@@ -249,10 +256,16 @@ function animate() {
 
     stats.update();
 
-    //console.log(x_bot.parts.hips.position.y)
-    ////tween_spline.update();
     obj.update();
 
+    //z = z + linear.update();
+    //x_bot.parts.hips.position.z = x_bot.parts.hips.position.z + 
+    linear.update();
+    //console.log(x_bot.parts.hips.position.z);
+
+    if (clock.getElapsedTime() > 2 && clock.getElapsedTime() < 4.1){
+        x_bot.model.rotation.y += 0.002;
+    }
 
 }
 
