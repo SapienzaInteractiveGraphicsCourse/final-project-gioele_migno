@@ -706,9 +706,25 @@ class X_Bot_Walk_Animation{
         }
     }
 
+    _init_hips_quaternion(component, x_bot_part){
+        component.func = (object) => {
+            //const old_z = x_bot_part.z;
+            x_bot_part.x = object.x;
+            x_bot_part.z = object.z;
+            //x_bot_part.set(object.x, object.y, old_z+object.z);
+            //console.log(object.z);
+        }
+        component.enable = true;
+        component.tween = new Tween_spline(component.animation['times'], component.animation['values'], 
+                                            component.func, 
+                                            TWEEN.Easing.Quadratic.None, 
+                                            TWEEN.Interpolation.CatmullRom);
+        component.tween.init(true);
+    }
+
     _init_hips_position(component, x_bot_part){
         this.hips_position_start_z = this.x_bot.parts.hips.position.z;
-
+        this.x_bot.parts.hips.position.z = 0;
         // const component = this.array_animation.hips_position;
         // const x_bot_part = this.x_bot.parts.hips.position;
 
@@ -725,9 +741,6 @@ class X_Bot_Walk_Animation{
                                             TWEEN.Easing.Quadratic.None, 
                                             TWEEN.Interpolation.CatmullRom);
         component.tween.init(true);
-
-
-        
     }
 
 
@@ -735,11 +748,14 @@ class X_Bot_Walk_Animation{
 
         // HIPS -------------------------------------------------------------------------------------------------
         //this._init_default(this.array_animation.hips_position, this.x_bot.parts.hips.position)
+        
+        //this._init_hips_position(this.array_animation.hips_position, this.x_bot.scene.position);//
         this._init_hips_position(this.array_animation.hips_position, this.x_bot.parts.hips.position);
         // ____________________________________________________________________________________________________
     
         // HIPS -----------------------------------------------
-        this._init_default(this.array_animation.hips_quaternion, this.x_bot.parts.hips.quaternion)
+        this._init_hips_quaternion(this.array_animation.hips_quaternion, this.x_bot.parts.hips.quaternion);
+        //this._init_default(this.array_animation.hips_quaternion, this.x_bot.parts.hips.quaternion)
         // __________________________________________________________
     
         // SPINE -----------------------------------------------

@@ -113,8 +113,25 @@ function test(){
 
 // }
 let z;
-let linear;
+let linear_x;
+let linear_z;
+let on = false;
+let run = false;
+let rotate = false;
+let lin = {z:0};
+let on_x = false;
 
+let move_x_bot_linear = {z_pos: new Linear_animation(), 
+                        z_neg: new Linear_animation(), 
+                        x_pos: new Linear_animation(), 
+                        x_neg: new Linear_animation()}
+
+let move_x_bot_started = {z_pos:false, z_neg:false, x_pos:false, x_neg:false};
+let move_x_bot_running = {z_pos:false, z_neg:false, x_pos:false, x_neg:false};
+
+let move_x_bot_orientation = 0;
+
+let walking = false;
 function init() {
 
     const container = document.createElement( 'div' );
@@ -135,7 +152,7 @@ function init() {
     // scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
     const axesHelper = new THREE.AxesHelper( 500 );
-    axesHelper.position.set(-500, 0, -500)
+    //axesHelper.position.set(-500, 0, -500)
     scene.add( axesHelper );
     // ground
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
@@ -165,10 +182,12 @@ function init() {
 
     test();
     //test_tween_spline();
-
+    const axesHelper02 = new THREE.AxesHelper( 500 );
+    //axesHelper2.position.set(-200, 0, -200)
+    scene.add( axesHelper02 );
 
     const axesHelper2 = new THREE.AxesHelper( 500 );
-    axesHelper2.position.set(-200, 0, -200)
+    //axesHelper2.position.set(-200, 0, -200)
     x_bot.scene.add( axesHelper2 );
 
 
@@ -228,11 +247,173 @@ function init() {
     //console.log(utils.dumpObject(scene).join('\n'));
 
     
+    //x_bot.parts.armature.position
     z = 0;
-    linear = new Linear_animation();
-    linear.init(83, x_bot.parts.hips.position, 'z');
-    linear.start();
+ 
+
+    move_x_bot_linear.z_pos.init(83, x_bot.parts.armature.position, 'z');
+    move_x_bot_linear.z_neg.init(-83, x_bot.parts.armature.position, 'z');
+    move_x_bot_linear.x_pos.init(83, x_bot.parts.armature.position, 'x');
+    move_x_bot_linear.x_neg.init(-83, x_bot.parts.armature.position, 'x');
+    
+
+
+    document.addEventListener('keydown', (event) => {
+        var name = event.key;
+        var code = event.code;
+
+        move_x_bot_keydown_dispatcher(name, move_x_bot_orientation);
+    }, false)
+
+    document.addEventListener('keyup', (event) => {
+        var name = event.key;
+        var code = event.code;
+
+        move_x_bot_keyup_dispatcher(name, move_x_bot_orientation);
+        move_x_bot_orientation = x_bot.parts.armature.rotation.y
+
+
+    }, false)
+
 }
+
+
+function move_x_bot_keydown(x_z_pos_neg){
+    if(!move_x_bot_started[x_z_pos_neg]){
+        move_x_bot_linear[x_z_pos_neg].start();
+        move_x_bot_started[x_z_pos_neg] = true;
+    }
+    move_x_bot_running[x_z_pos_neg] = true;
+}
+
+function move_x_bot_keyup(x_z_pos_neg){
+    move_x_bot_started[x_z_pos_neg] = false;
+    move_x_bot_running[x_z_pos_neg] = false;
+    move_x_bot_linear[x_z_pos_neg].reset();
+}
+
+
+
+
+function move_x_bot_keydown_dispatcher(name, rot){
+    if(rot == 0){
+        if(name == 'ArrowUp'){
+            move_x_bot_keydown('z_pos');
+            walking = true;
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keydown('z_neg');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keydown('x_pos');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keydown('x_neg');
+        }
+    }
+    else if(rot == Math.PI/2){
+        if(name == 'ArrowUp'){
+            move_x_bot_keydown('x_pos');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keydown('x_neg');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keydown('z_neg');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keydown('z_pos');
+        }
+    }
+    else if(rot == Math.PI){
+        if(name == 'ArrowUp'){
+            move_x_bot_keydown('z_neg');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keydown('z_pos');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keydown('x_neg');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keydown('x_pos');
+        }
+    }
+    else if(rot == -Math.PI/2){
+        if(name == 'ArrowUp'){
+            move_x_bot_keydown('x_neg');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keydown('x_pos');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keydown('z_pos');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keydown('z_neg');
+        }
+    }
+}
+function move_x_bot_keyup_dispatcher(name, rot){
+    if(rot == 0){
+        if(name == 'ArrowUp'){
+            move_x_bot_keyup('z_pos');
+            walking=false;
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keyup('z_neg');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keyup('x_pos');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keyup('x_neg');
+        }
+    }
+    else if(rot == Math.PI/2){
+        if(name == 'ArrowUp'){
+            move_x_bot_keyup('x_pos');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keyup('x_neg');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keyup('z_neg');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keyup('z_pos');
+        }
+    }
+    else if(rot == Math.PI){
+        if(name == 'ArrowUp'){
+            move_x_bot_keyup('z_neg');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keyup('z_pos');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keyup('x_neg');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keyup('x_pos');
+        }
+    }
+    else if(rot == -Math.PI/2){
+        if(name == 'ArrowUp'){
+            move_x_bot_keyup('x_neg');
+        }
+        else if(name == 'ArrowDown'){
+            move_x_bot_keyup('x_pos');
+        }
+        else if(name == 'ArrowLeft'){
+            move_x_bot_keyup('z_pos');
+        }
+        else if(name == 'ArrowRight'){
+            move_x_bot_keyup('z_neg');
+        }
+    }
+}
+
 
 function onWindowResize() {
 
@@ -255,18 +436,29 @@ function animate() {
     renderer.render( scene, camera );
 
     stats.update();
-
-    obj.update();
-
-    //z = z + linear.update();
-    //x_bot.parts.hips.position.z = x_bot.parts.hips.position.z + 
-    linear.update();
-    //console.log(x_bot.parts.hips.position.z);
-
-    if (clock.getElapsedTime() > 2 && clock.getElapsedTime() < 4.1){
-        x_bot.model.rotation.y += 0.002;
+    if(walking){
+        obj.update();
+    }
+    if (move_x_bot_running.z_pos){
+        move_x_bot_linear.z_pos.update();
+        x_bot.parts.armature.rotation.y = 0;
+        
+    }
+    if(move_x_bot_running.x_pos){
+        move_x_bot_linear.x_pos.update();
+        x_bot.parts.armature.rotation.y = Math.PI/2;
     }
 
+    if (move_x_bot_running.x_neg){
+        move_x_bot_linear.x_neg.update();
+        x_bot.parts.armature.rotation.y = -Math.PI/2;
+    }
+    if(move_x_bot_running.z_neg){
+        move_x_bot_linear.z_neg.update();
+        x_bot.parts.armature.rotation.y = Math.PI;
+    }
+
+    console.log( x_bot.parts.armature.rotation.y)
 }
 
 await load_models();

@@ -123,7 +123,7 @@ class X_Bot{
     }
 
     __init(){
-        //this.parts.armature = this.model.getObjectByName('Armature');
+        this.parts.armature = this.model.getObjectByName('Armature');
         
         this.parts.hips = this.model.getObjectByName('mixamorigHips');
         
