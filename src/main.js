@@ -13,6 +13,9 @@ import { Environment } from './Environment.js'
 import { Tween_spline } from './Tween_spline.js'
 import { X_Bot_Walk_Animation } from './X_bot_Walk_Animation.js'
 
+import { X_bot_Interpolation_Configuartions } from './X_bot_Interpolation_Configuartions.js'
+
+
 
 import Stats from './jsm/libs/stats.module.js';
 
@@ -54,7 +57,13 @@ async function load_models(){
 }
 
 
+let going_to_rest = false;
+let going_to_rest_started = false;
+let going_to_rest_animation_obj = null;
 
+let going_to_walk = false;
+let going_to_walk_started = false;
+let going_to_walk_animation_obj = null;
 
 
 let start_x;
@@ -66,52 +75,9 @@ let obj;
 function test(){
     obj = new X_Bot_Walk_Animation(x_bot);
     obj.init();
-    obj.start();
+    //obj.start();
 }
- function test_tween_spline(){
- }
 
-//     let times = [0, 500, 1000, 1500, 2000];
-//     let values = [
-//         {x: 2.38, y: 1.34, z:0}, 
-// 		{x: 1.28, y: -2.53, z:2}, 
-// 		{x: 0.32, y: 1.45, z:1.5}, 
-// 		{x: 1.72, y: -1.60, z:1.7}, 
-// 		{x: 2.37, y: 1.34, z:2}];
-
-
-//         // {x: 0.7596, z: 99.43753051757812, y:0}, 
-// 		// {x: -0.3358, z: 95.5666275024414, y:2}, 
-// 		// {x: -1.2901, z: 99.54318237304688, y:1.5}, 
-// 		// {x: 0.1066, z: 96.48882293701172, y:1.7}, 
-// 		// {x: 0.7595, z: 99.43751525878906, y:2}];
-
-//         // let values = [
-//         //     {x: 2.3769922256469727, z: 99.43753051757812, y:83.62864685058594}, 
-//         //     {x: 1.2815183401107788, z: 95.5666275024414, y:127.48887634277344}, 
-//         //     {x: 0.3272812068462372, z: 99.54318237304688, y:169.3924560546875}, 
-//         //     {x: 1.7239420413970947, z: 96.48882293701172, y:209.16741943359375}, 
-//         //     {x: 2.376992702484131, z: 99.43751525878906, y:251.5056915283203}];
-
-//         console.log(JSON.stringify(x_bot.model.position))
-//         console.log(JSON.stringify(x_bot.parts.hips.position))
-    
-//         //.set(0,0,-104);
-//         let func_handler = (object) => {
-//         // Called after tween.js updates 'coords'.
-//         // Move 'box' to the position described by 'coords' with a CSS translation.
-//         let old_y = x_bot.parts.hips.position.z; 
-//        x_bot.parts.hips.position.set(object.x,  start_z + object.y,old_y +object.z);//position.set(object.x, object.y, object.z);
-//        //x_bot.parts.hips.position.set(object.x, object.y, object.z);//position.set(object.x, object.y, object.z);
-
-//     }
-
-//     start_z = x_bot.parts.hips.position.z;
-//         tween_spline = new Tween_spline(times, values, func_handler, TWEEN.Easing.Quadratic.Out, TWEEN.Interpolation.CatmullRom);
-//         tween_spline.init(true);
-//         tween_spline.start();
-
-// }
 let z;
 let linear_x;
 let linear_z;
@@ -130,6 +96,14 @@ let move_x_bot_started = {z_pos:false, z_neg:false, x_pos:false, x_neg:false};
 let move_x_bot_running = {z_pos:false, z_neg:false, x_pos:false, x_neg:false};
 
 let move_x_bot_orientation = 0;
+
+let ooo;
+function test_get_animation(){
+    ooo = new X_bot_Interpolation_Configuartions(x_bot);
+
+    ooo.init(x_bot.rest_configuration, x_bot.T_configuration, 2000);
+    ooo.start();
+}
 
 let walking = false;
 function init() {
@@ -262,157 +236,84 @@ function init() {
         var name = event.key;
         var code = event.code;
 
-        move_x_bot_keydown_dispatcher(name, move_x_bot_orientation);
+        keydown_dispatcher(name, x_bot.parts.armature.rotation.y);
+        //move_x_bot_keydown_dispatcher(name, move_x_bot_orientation);
     }, false)
 
     document.addEventListener('keyup', (event) => {
         var name = event.key;
         var code = event.code;
 
-        move_x_bot_keyup_dispatcher(name, move_x_bot_orientation);
-        move_x_bot_orientation = x_bot.parts.armature.rotation.y
-
+        keyup_dispatcher(name, x_bot.parts.armature.rotation.y);
 
     }, false)
 
+    x_bot.set_rest_configuration();
+
+   // test_get_animation();
 }
 
+let left_key_pressing = false;
+let right_key_pressing = false;
 
-function move_x_bot_keydown(x_z_pos_neg){
-    if(!move_x_bot_started[x_z_pos_neg]){
-        move_x_bot_linear[x_z_pos_neg].start();
-        move_x_bot_started[x_z_pos_neg] = true;
+function keydown_dispatcher(name, rotation_y){
+    if(name == 'ArrowUp'){
+        start_linear(rotation_y);
+        walking = true;
     }
-    move_x_bot_running[x_z_pos_neg] = true;
-}
+    else if(name == 'ArrowLeft'){
+        if(!left_key_pressing){
+            left_key_pressing = true;
+            reset_linear(rotation_y);
+            const tmp = x_bot.parts.armature.rotation.y + Math.PI/2;
+            if(tmp > Math.PI){
+                x_bot.parts.armature.rotation.y = -Math.PI/2;
+            }
+            else{
+                x_bot.parts.armature.rotation.y = tmp;
+            }
 
-function move_x_bot_keyup(x_z_pos_neg){
-    move_x_bot_started[x_z_pos_neg] = false;
-    move_x_bot_running[x_z_pos_neg] = false;
-    move_x_bot_linear[x_z_pos_neg].reset();
-}
-
-
-
-
-function move_x_bot_keydown_dispatcher(name, rot){
-    if(rot == 0){
-        if(name == 'ArrowUp'){
-            move_x_bot_keydown('z_pos');
-            walking = true;
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keydown('z_neg');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keydown('x_pos');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keydown('x_neg');
+            if(walking){
+                start_linear(x_bot.parts.armature.rotation.y);
+            }
         }
     }
-    else if(rot == Math.PI/2){
-        if(name == 'ArrowUp'){
-            move_x_bot_keydown('x_pos');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keydown('x_neg');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keydown('z_neg');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keydown('z_pos');
-        }
-    }
-    else if(rot == Math.PI){
-        if(name == 'ArrowUp'){
-            move_x_bot_keydown('z_neg');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keydown('z_pos');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keydown('x_neg');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keydown('x_pos');
-        }
-    }
-    else if(rot == -Math.PI/2){
-        if(name == 'ArrowUp'){
-            move_x_bot_keydown('x_neg');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keydown('x_pos');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keydown('z_pos');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keydown('z_neg');
+    else if(name == 'ArrowRight'){
+        if(!right_key_pressing){
+            right_key_pressing = true;
+            reset_linear(rotation_y);
+            const tmp = x_bot.parts.armature.rotation.y - Math.PI/2;
+            if(tmp < -Math.PI/2){
+                x_bot.parts.armature.rotation.y = Math.PI;
+            }
+            else{
+                x_bot.parts.armature.rotation.y = tmp;
+            }
+            if(walking){
+                start_linear(x_bot.parts.armature.rotation.y);
+            }
         }
     }
 }
-function move_x_bot_keyup_dispatcher(name, rot){
-    if(rot == 0){
-        if(name == 'ArrowUp'){
-            move_x_bot_keyup('z_pos');
-            walking=false;
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keyup('z_neg');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keyup('x_pos');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keyup('x_neg');
-        }
+
+function keyup_dispatcher(name, rotation_y){
+    if(name == 'ArrowUp'){
+        reset_linear(rotation_y);
+        walking = false;
+        walk_animation_started = false;
+        going_to_rest = true;
+
+        obj.reset();
+
     }
-    else if(rot == Math.PI/2){
-        if(name == 'ArrowUp'){
-            move_x_bot_keyup('x_pos');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keyup('x_neg');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keyup('z_neg');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keyup('z_pos');
-        }
+    else if(name == 'ArrowLeft'){
+        left_key_pressing = false;
     }
-    else if(rot == Math.PI){
-        if(name == 'ArrowUp'){
-            move_x_bot_keyup('z_neg');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keyup('z_pos');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keyup('x_neg');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keyup('x_pos');
-        }
-    }
-    else if(rot == -Math.PI/2){
-        if(name == 'ArrowUp'){
-            move_x_bot_keyup('x_neg');
-        }
-        else if(name == 'ArrowDown'){
-            move_x_bot_keyup('x_pos');
-        }
-        else if(name == 'ArrowLeft'){
-            move_x_bot_keyup('z_pos');
-        }
-        else if(name == 'ArrowRight'){
-            move_x_bot_keyup('z_neg');
-        }
+    else if(name == 'ArrowRight'){
+        right_key_pressing = false;
     }
 }
+
 
 
 function onWindowResize() {
@@ -423,7 +324,10 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
+let clock_22 = new THREE.Clock();
+let start_time;
 
+let walk_animation_started = false;
 
 function animate() {
 
@@ -436,32 +340,117 @@ function animate() {
     renderer.render( scene, camera );
 
     stats.update();
+
     if(walking){
+        if(!walk_animation_started){
+            walk_animation_started = true;
+            obj.start();
+        }
+
         obj.update();
+        move_forward(x_bot.parts.armature.rotation.y);
+        going_to_rest = false;
+        going_to_rest_started = false;
+        //console.log(JSON.stringify(x_bot.get_current_configuration()));
     }
-    if (move_x_bot_running.z_pos){
-        move_x_bot_linear.z_pos.update();
-        x_bot.parts.armature.rotation.y = 0;
-        
+    else if(going_to_rest){
+        if(!going_to_rest_started){
+            const current_config = x_bot.get_current_configuration();
+            const rest_conf = x_bot.rest_configuration;
+
+            going_to_rest_animation_obj = new X_bot_Interpolation_Configuartions(x_bot);
+            going_to_rest_animation_obj.init(current_config, rest_conf, 400);
+            going_to_rest_animation_obj.start();
+            going_to_rest_started = true;
+            clock_22.start();
+            start_time = clock_22.getElapsedTime();
+        }
+        if(clock_22.getElapsedTime()- start_time > 2000){
+            going_to_rest = false;
+            going_to_rest_started = false;
+        }
+        going_to_rest_animation_obj.update();
     }
-    if(move_x_bot_running.x_pos){
-        move_x_bot_linear.x_pos.update();
-        x_bot.parts.armature.rotation.y = Math.PI/2;
+    else{
+        x_bot.set_rest_configuration();
     }
 
-    if (move_x_bot_running.x_neg){
-        move_x_bot_linear.x_neg.update();
-        x_bot.parts.armature.rotation.y = -Math.PI/2;
-    }
-    if(move_x_bot_running.z_neg){
-        move_x_bot_linear.z_neg.update();
-        x_bot.parts.armature.rotation.y = Math.PI;
-    }
-
-    console.log( x_bot.parts.armature.rotation.y)
+    //ooo.update();
 }
 
 await load_models();
 init();
 animate();
 
+
+function move_forward(rotation_y){
+    if(rotation_y == 0){
+        move_x_bot_linear.z_pos.update();
+        console.log('z_pos');
+    }
+    else if(rotation_y == Math.PI/2){
+        move_x_bot_linear.x_pos.update();
+        console.log('x_pos');
+    }
+    else if(rotation_y == -Math.PI/2){
+        move_x_bot_linear.x_neg.update();
+        console.log('x_neg');
+    }
+    else if(rotation_y == Math.PI){
+        console.log('z_neg');
+        move_x_bot_linear.z_neg.update();
+    }
+}
+
+function start_linear(rotation_y){
+   
+    if(rotation_y == 0){
+        start_linear_by_name('z_pos');
+    }
+    else if(rotation_y == Math.PI/2){
+        start_linear_by_name('x_pos');
+    }
+    else if(rotation_y == -Math.PI/2){
+        start_linear_by_name('x_neg');
+    }
+    else if(rotation_y == Math.PI){
+        start_linear_by_name('z_neg');
+    }
+}
+
+function start_linear_by_name(x_z_pos_neg){
+    
+    if(!move_x_bot_started[x_z_pos_neg]){
+        move_x_bot_linear[x_z_pos_neg].start();
+        move_x_bot_started[x_z_pos_neg] = true;
+
+        console.log('started linear:'+ x_z_pos_neg);
+    }
+    move_x_bot_running[x_z_pos_neg] = true;
+}
+
+
+
+function reset_linear(rotation_y){
+    
+    if(rotation_y == 0){
+        reset_linear_by_name('z_pos');
+    }
+    else if(rotation_y == Math.PI/2){
+        reset_linear_by_name('x_pos');
+    }
+    else if(rotation_y == -Math.PI/2){
+        reset_linear_by_name('x_neg');
+    }
+    else if(rotation_y == Math.PI){
+        reset_linear_by_name('z_neg');
+    }
+}
+
+function reset_linear_by_name(x_z_pos_neg){
+    move_x_bot_started[x_z_pos_neg] = false;
+    move_x_bot_running[x_z_pos_neg] = false;
+    move_x_bot_linear[x_z_pos_neg].reset();
+
+    console.log('reset linear:'+ x_z_pos_neg);
+}

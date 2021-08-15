@@ -1,9 +1,9 @@
 class Utils {
 
+  // source three.js fundamentals
   dumpVec3(v3, precision = 3) {
     return `${v3.x.toFixed(precision)}, ${v3.y.toFixed(precision)}, ${v3.z.toFixed(precision)}`;
   }
-    
   dumpObject(obj, lines=[], isLast = true, prefix = '') {
     const localPrefix = isLast ? '└─' : '├─';
     lines.push(`${prefix}${prefix ? localPrefix : ''}${obj.name || '*no-name*'} [${obj.type}]`);
@@ -21,6 +21,34 @@ class Utils {
     });
     return lines;
   }
+
+  // source: https://dmitripavlutin.com/how-to-compare-objects-in-javascript/
+  isObject(object) {
+    return object != null && typeof object === 'object';
+  }
+  deepEqual(object1, object2) {
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+  
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+  
+    for (const key of keys1) {
+      const val1 = object1[key];
+      const val2 = object2[key];
+      const areObjects = this.isObject(val1) && this.isObject(val2);
+      if (
+        areObjects && !this.deepEqual(val1, val2) ||
+        !areObjects && val1 !== val2
+      ) {
+        return false;
+      }
+    }
+  
+    return true;
+  }
+  
 
 };
 

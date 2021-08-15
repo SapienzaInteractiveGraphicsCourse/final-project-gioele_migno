@@ -889,7 +889,18 @@ class X_Bot_Walk_Animation{
                 value.tween.update();
             }
         }
+    }
 
+    reset(){
+        // this.array_animation.hips_position.tween.update();
+        // this.array_animation.hips_quat.tween.update();
+        // this.array_animation.spine_quat.tween.update();
+        for (const [key, value] of Object.entries(this.array_animation)) {
+            //console.log(key, value);
+            if(value.enable){
+                value.tween.reset();
+            }
+        }
     }
 }
 export { X_Bot_Walk_Animation };

@@ -59,7 +59,16 @@ class Tween_spline{
 
     start(){
         this.tween_list[0].start();
-        
+    }
+ 
+    // based on https://github.com/tweenjs/tween.js/issues/302
+    reset(){
+        // Resets the tween (and the graphic)
+        // TODO, tween.reset() API, https://github.com/tweenjs/tween.js/issues/302
+        this.tween_list[0].stop() // stop is required before the next call will work
+        this.tween_list[0].start(0) // restore initial values
+        this.tween_list[0].update(0) // apply initial values to the graphic
+        this.tween_list[0].stop() // finally, stop the tween, again
     }
 }
 export { Tween_spline };
