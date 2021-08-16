@@ -26,6 +26,9 @@ let x_bot;
 let env;
 
 function add_axes_helper(scene, x_bot){
+    const axesHelper = new THREE.AxesHelper( 500 );
+ 
+    scene.add( axesHelper );
 
     const axesHelper02 = new THREE.AxesHelper( 500 );
     scene.add( axesHelper02 );
@@ -34,7 +37,7 @@ function add_axes_helper(scene, x_bot){
  
     x_bot.scene.add( axesHelper2 );
 
-    scene.add(x_bot.scene)
+    
    
 
     let node;
@@ -89,10 +92,6 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xa0a0a0 );
 
-
-    const axesHelper = new THREE.AxesHelper( 500 );
- 
-    scene.add( axesHelper );
     // ground
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
     mesh.rotation.x = - Math.PI / 2;
@@ -104,15 +103,9 @@ function init() {
     grid.material.transparent = true;
     scene.add( grid );
 
-
     add_axes_helper(scene, x_bot);
 
-    const surface_color = x_bot.COLORS.WHITE;
-    const joints_color = x_bot.COLORS.BLUE;
-    x_bot.set_color(surface_color, joints_color);
-    
 
-    
     const color = 0xFFFFFF;
     const intensity = 0.5;
     
@@ -120,10 +113,7 @@ function init() {
     scene.add(ambient_light)
 
     env.init();
- 
     scene.add(env.scene);
-
-    //console.log(utils.dumpObject(env.scene).join('\n'));
 
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -142,14 +132,17 @@ function init() {
     stats = new Stats();
     container.appendChild( stats.dom );
 
-    //console.log(utils.dumpObject(scene).join('\n'));
 
-    
 
     walk_animation = new X_bot_Walk(x_bot);
     walk_animation.init();
 
+    const surface_color = x_bot.COLORS.WHITE;
+    const joints_color = x_bot.COLORS.BLUE;
+    x_bot.set_color(surface_color, joints_color);
     
+    scene.add(x_bot.model)
+    x_bot.set_rest_configuration();
 
 
     document.addEventListener('keydown', (event) => {
@@ -167,9 +160,6 @@ function init() {
         walk_animation.keyup_dispatcher(name);
 
     }, false)
-
-    x_bot.set_rest_configuration();
-
 }
 
 
@@ -199,8 +189,6 @@ function animate() {
     renderer.render( scene, camera );
     stats.update();
     walk_animation.update();
-
-    //ooo.update();
 }
 
 await load_models();
