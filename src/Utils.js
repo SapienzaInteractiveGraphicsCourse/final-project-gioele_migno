@@ -49,6 +49,9 @@ class Utils {
     return true;
   }
   
+  deepCopy(object){
+    return JSON.parse(JSON.stringify(object));
+  }
 
 };
 

@@ -20,10 +20,10 @@ const X_BOT_PATH_MODEL = './models/x_bot_rotated.glb';//'./models/x_bot_T_pose.g
 
 const ENV_PATH_MODEL = './models/cube.glb';
 
-let mixer;
 
 let x_bot;
 let env;
+let walk_animation;
 
 function add_axes_helper(scene, x_bot){
     const axesHelper = new THREE.AxesHelper( 500 );
@@ -71,7 +71,7 @@ async function load_models(){
 
 
 
-let walk_animation;
+
 
 
 
@@ -134,8 +134,29 @@ function init() {
 
 
 
+
     walk_animation = new X_bot_Walk(x_bot);
-    walk_animation.init();
+    
+    let box_1 = walk_animation.get_box_template();
+    let box_2 = walk_animation.get_box_template();
+
+    box_1.left_up.x = 585;
+    box_1.left_up.z = 715;
+    
+    box_1.right_bottom.x = -575;
+    box_1.right_bottom.z = -715;
+
+    box_2.left_up.x = 100;
+    box_2.left_up.z = 100;
+    
+    box_2.right_bottom.x = -100;
+    box_2.right_bottom.z = -1015;
+
+    let boxes = [];
+    boxes.push(box_1);
+    boxes.push(box_2);
+
+    walk_animation.init(boxes);
 
     const surface_color = x_bot.COLORS.WHITE;
     const joints_color = x_bot.COLORS.BLUE;
@@ -159,7 +180,11 @@ function init() {
 
         walk_animation.keyup_dispatcher(name);
 
+        console.log(JSON.stringify(x_bot.parts.armature.position))
     }, false)
+
+
+
 }
 
 
@@ -181,10 +206,6 @@ function onWindowResize() {
 function animate() {
 
     requestAnimationFrame( animate );
-
-    const delta = clock.getDelta();
-
-    if ( mixer ) mixer.update( delta );
 
     renderer.render( scene, camera );
     stats.update();

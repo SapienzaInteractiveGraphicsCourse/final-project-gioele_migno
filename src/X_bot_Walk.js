@@ -5,12 +5,14 @@ import { X_Bot_Walk_Animation } from './X_bot_Walk_Animation.js'
 import { X_bot_Interpolation_Configuartions } from './X_bot_Interpolation_Configuartions.js'
 import * as THREE from '../build/three.module.js';
 
+import { Utils } from './Utils.js'
 
+        
 class X_bot_Walk {
 
     constructor(x_bot){
         this.x_bot = x_bot;
-        
+        this.utils = new Utils();
         this.left_key_pressing = false;
         this.right_key_pressing = false;
 
@@ -33,9 +35,20 @@ class X_bot_Walk {
         this.start_time_to_rest;
 
         this.walk_animation_started = false;
+
+        this.template_box = {
+            left_up: {x:0.0, z:0.0},
+            right_bottom: {x:0.0, z:0.0}
+        }
+        this.boxes = [];
+
+        this.hit_obstacle = false;
     }
   
-    init(){
+    init(boxes){
+        this.boxes = boxes;
+
+        //console.log(JSON.stringify(this.boxes));
         const speed = 83;
         this.move_x_bot_linear.z_pos.init(speed, this.x_bot.parts.armature.position, 'z');
         this.move_x_bot_linear.z_neg.init(-speed, this.x_bot.parts.armature.position, 'z');
@@ -46,16 +59,65 @@ class X_bot_Walk {
     }
 
 
+    _is_in_space(x, z){
+        for(let i=0; i < this.boxes.length; i++){
+            if(this. _is_in_box(this.boxes[i], x, z)){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    _is_in_box(box, x, z){
+        if(x >= box.right_bottom.x && z >= box.right_bottom.z &&
+                x <= box.left_up.x && z <= box.left_up.z){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    get_box_template(){
+        return this.utils.deepCopy(this.template_box);
+    }
+
+    _will_go_outside(step, x, z, rotation_y){
+        let next_x = x;
+        let next_z = z;
+
+        if(rotation_y == 0){
+            next_z += step;
+        }
+        else if(rotation_y == Math.PI/2){
+            next_x += step;
+        }
+        else if(rotation_y == -Math.PI/2){
+            next_x -= step;
+        }
+        else if(rotation_y == Math.PI){
+            next_z -= step;
+        }
+
+        return !this._is_in_space(next_x, next_z);
+    }
 
     keydown_dispatcher(name){
         let rotation_y = this.x_bot.parts.armature.rotation.y;
         if(name == 'ArrowUp'){
-            this._start_linear(rotation_y);
-            this.walking = true;
+            if(!this.hit_obstacle){
+                this._start_linear(rotation_y);
+                this.walking = true;
+            }
+            else{
+
+            }
+
         }
         else if(name == 'ArrowLeft'){
             if(!this.left_key_pressing){
+                
+
                 this.left_key_pressing = true;
                 this._reset_linear(rotation_y);
                 const tmp = this.x_bot.parts.armature.rotation.y + Math.PI/2;
@@ -65,9 +127,12 @@ class X_bot_Walk {
                 else{
                     this.x_bot.parts.armature.rotation.y = tmp;
                 }
+                
+                this.hit_obstacle = false;
                 if(this.walking){
                     this._start_linear(this.x_bot.parts.armature.rotation.y);
                 }
+
             }
         }
         else if(name == 'ArrowRight'){
@@ -81,6 +146,8 @@ class X_bot_Walk {
                 else{
                     this.x_bot.parts.armature.rotation.y = tmp;
                 }
+
+                this.hit_obstacle = false;
                 if(this.walking){
                     this._start_linear(this.x_bot.parts.armature.rotation.y);
                 }
@@ -89,15 +156,18 @@ class X_bot_Walk {
     }
 
     keyup_dispatcher(name){
+
+       //console.log(this._is_in_space(this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z));
         let rotation_y = this.x_bot.parts.armature.rotation.y;
         if(name == 'ArrowUp'){
-            this._reset_linear(rotation_y);
-            this.walking = false;
-            this.walk_animation_started = false;
-            this.going_to_rest = true;
+            if(!this.hit_obstacle){
+                this._reset_linear(rotation_y);
+                this.walking = false;
+                this.walk_animation_started = false;
+                this.going_to_rest = true;
 
-            this.walk_animation.reset();
-
+                this.walk_animation.reset();
+            }
         }
         else if(name == 'ArrowLeft'){
             this.left_key_pressing = false;
@@ -113,11 +183,25 @@ class X_bot_Walk {
                 this.walk_animation_started = true;
                 this.walk_animation.start();
             }
+            
+            if(this._will_go_outside(10, this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z, this.x_bot.parts.armature.rotation.y)){
+                this.hit_obstacle = true;
+                this.going_to_rest = true;
+
+                this._reset_linear(this.x_bot.parts.armature.rotation.y);
+                this.walking = false;
+                this.walk_animation_started = false;
+                this.going_to_rest = true;
     
-            this.walk_animation.update();
-            this._move_forward(this.x_bot.parts.armature.rotation.y);
-            this.going_to_rest = false;
-            this.going_to_rest_started = false;
+                this.walk_animation.reset();
+            }
+            else{
+                this.walk_animation.update();
+                this._move_forward(this.x_bot.parts.armature.rotation.y);
+                this.going_to_rest = false;
+                this.going_to_rest_started = false;
+            }
+
         }
         else if(this.going_to_rest){
             if(!this.going_to_rest_started){
@@ -135,6 +219,7 @@ class X_bot_Walk {
             if(this.clock_to_rest.getElapsedTime()- this.start_time_to_rest > 2000){
                 this.going_to_rest = false;
                 this.going_to_rest_started = false;
+                
             }
             this.going_to_rest_animation_walk_animation.update();
         }
