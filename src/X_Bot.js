@@ -1,4 +1,5 @@
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+import * as THREE from '../build/three.module.js';
 
 
 class X_Bot{
@@ -351,6 +352,11 @@ class X_Bot{
             righttoebase_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0},
             // ___________________________________________________________
         }
+
+        this.COLORS = {
+            WHITE: 0xd6d6d6,
+            BLUE: 0x010014
+        };
     }
     
 
@@ -362,7 +368,19 @@ class X_Bot{
         this.__init();  
     }
 
+    set_color(surface_color, joints_color){
+        // let surface = 0xd6d6d6;
+        // let joints = 0x010014;
+
+        this.materials.surface.material = new THREE.MeshPhongMaterial({color: surface_color}); 
+        this.materials.joints.material = new THREE.MeshPhongMaterial({color: joints_color});
+    }
+
     __init(){
+        this.model.scale.x = 1;
+        this.model.scale.y = 1;
+        this.model.scale.z = 1;
+
         this.parts.armature = this.model.getObjectByName('Armature');
         
         this.parts.hips = this.model.getObjectByName('mixamorigHips');

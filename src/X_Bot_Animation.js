@@ -89,7 +89,7 @@ class X_Bot_Animation{
             x_bot_part.x = object.x;
             x_bot_part.y = object.y;
         }
-        console.log(JSON.stringify(component.animation));
+        //console.log(JSON.stringify(component.animation));
         component.enable = true;
         component.tween = new Tween_spline(component.animation['times'], component.animation['values'], 
                                             component.func, 
