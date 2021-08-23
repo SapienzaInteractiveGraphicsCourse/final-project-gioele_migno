@@ -235,7 +235,8 @@ class X_Bot{
 
         this.rest_configuration = {
             // HIPS --------------------------------------------
-            hips_position: {x: 0.33, y: 99.54, z:0}, 
+            //hips_position: {x: 0.33, y: 99.54, z:0},
+            hips_position: {x: 0.33, y: 105, z:0}, 
             hips_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0}, 
             //_________________________________________________________
         
@@ -353,6 +354,7 @@ class X_Bot{
             // ___________________________________________________________
         }
 
+
         this.COLORS = {
             WHITE: 0xd6d6d6,
             BLUE: 0x010014
@@ -377,9 +379,9 @@ class X_Bot{
     }
 
     __init(){
-        this.model.scale.x = 1;
-        this.model.scale.y = 1;
-        this.model.scale.z = 1;
+        this.model.scale.x = 1.0;
+        this.model.scale.y = 1.0;
+        this.model.scale.z = 1.0;
 
         this.parts.armature = this.model.getObjectByName('Armature');
         

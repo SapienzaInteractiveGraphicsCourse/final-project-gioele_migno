@@ -5,12 +5,19 @@ import { X_Bot } from './X_Bot.js'
 
 import { X_bot_Walk } from './X_bot_Walk.js'
 
+import { X_Bot_Cube_Animation } from './X_Bot_Cube_Animation.js'
+
+
+
 import Stats from './jsm/libs/stats.module.js';
 
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
+import { Utils } from './Utils.js'
 
 
+let anim_test;
 
+const utils = new Utils();
 let camera, scene, renderer, stats;
 
 const clock = new THREE.Clock();
@@ -18,10 +25,13 @@ const clock = new THREE.Clock();
 
 const X_BOT_PATH_MODEL = './models/x_bot_rotated.glb';//'./models/x_bot_T_pose.glb';
 
-const ENV_PATH_MODEL = './models/cube.glb';
+const ENV_PATH_MODEL = './models/room_s.glb';//'./models/test.glb';//'./models/scene_cube.glb'; //'./models/cube.glb';
 
 
 let x_bot;
+
+let x_bot_walk;
+
 let env;
 let walk_animation;
 
@@ -63,6 +73,9 @@ async function load_models(){
     x_bot = new X_Bot();
     await x_bot.load(X_BOT_PATH_MODEL);
 
+    x_bot_walk = new X_Bot();
+    await x_bot_walk.load(X_BOT_PATH_MODEL);
+
     //ROOM
     env = new Environment();
     await env.load(ENV_PATH_MODEL);
@@ -93,15 +106,15 @@ function init() {
     scene.background = new THREE.Color( 0xa0a0a0 );
 
     // ground
-    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 4000, 4000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
-    scene.add( mesh );
+    //scene.add( mesh );
 
-    const grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
+    const grid = new THREE.GridHelper( 4000, 20, 0x000000, 0x000000 );
     grid.material.opacity = 0.2;
     grid.material.transparent = true;
-    scene.add( grid );
+    //scene.add( grid );
 
     add_axes_helper(scene, x_bot);
 
@@ -135,7 +148,7 @@ function init() {
 
 
 
-    walk_animation = new X_bot_Walk(x_bot);
+    walk_animation = new X_bot_Walk(x_bot_walk);
     
     let box_1 = walk_animation.get_box_template();
     let box_2 = walk_animation.get_box_template();
@@ -166,12 +179,18 @@ function init() {
     x_bot.set_rest_configuration();
 
 
+    
+    scene.add(x_bot_walk.model)
+    x_bot_walk.set_rest_configuration();
+
+
     document.addEventListener('keydown', (event) => {
         var name = event.key;
         var code = event.code;
 
         walk_animation.keydown_dispatcher(name);
         
+        //console.log(JSON.stringify(x_bot.parts.hips.position))
     }, false)
 
     document.addEventListener('keyup', (event) => {
@@ -180,11 +199,13 @@ function init() {
 
         walk_animation.keyup_dispatcher(name);
 
-        console.log(JSON.stringify(x_bot.parts.armature.position))
     }, false)
 
 
+    anim_test = new X_Bot_Cube_Animation(x_bot, env);
+    anim_test.init();
 
+    //utils.print_dump_object(scene);
 }
 
 
@@ -210,6 +231,8 @@ function animate() {
     renderer.render( scene, camera );
     stats.update();
     walk_animation.update();
+
+    anim_test.update();
 }
 
 await load_models();

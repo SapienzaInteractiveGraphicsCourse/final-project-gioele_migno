@@ -22,6 +22,9 @@ class Utils {
     return lines;
   }
 
+  print_dump_object(object){
+    console.log(this.dumpObject(object).join('\n'));
+  }
   // source: https://dmitripavlutin.com/how-to-compare-objects-in-javascript/
   isObject(object) {
     return object != null && typeof object === 'object';

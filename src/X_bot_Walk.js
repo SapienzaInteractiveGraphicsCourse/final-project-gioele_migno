@@ -165,7 +165,9 @@ class X_bot_Walk {
                 this.walking = false;
                 this.walk_animation_started = false;
                 this.going_to_rest = true;
-
+                //########
+                this.going_to_rest_started = false;
+                //#########
                 this.walk_animation.reset();
             }
         }
@@ -216,10 +218,9 @@ class X_bot_Walk {
                 this.clock_to_rest.start();
                 this.start_time_to_rest = this.clock_to_rest.getElapsedTime();
             }
-            if(this.clock_to_rest.getElapsedTime()- this.start_time_to_rest > 2000){
+            if(this.clock_to_rest.getElapsedTime()- this.start_time_to_rest > 0.4){//2000){
                 this.going_to_rest = false;
                 this.going_to_rest_started = false;
-                
             }
             this.going_to_rest_animation_walk_animation.update();
         }

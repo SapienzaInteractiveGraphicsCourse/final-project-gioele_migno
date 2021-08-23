@@ -1,0 +1,1208 @@
+{
+    "mixamorig:Hips": {
+        "location": {
+            "x": -0.0,
+            "y": 0.2834,
+            "z": -0.5218
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:Spine": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:Spine1": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:Spine2": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:Neck": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:Head": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:HeadTop_End": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftEye": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightEye": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftShoulder": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftArm": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 2.4,
+            "y": -0.2,
+            "z": -0.4,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftForeArm": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.5,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHand": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0002,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandThumb1": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0001,
+            "y": -0.0001,
+            "z": 0.0001,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandThumb2": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandThumb3": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandThumb4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandIndex1": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandIndex2": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandIndex3": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandIndex4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandMiddle1": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandMiddle2": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandMiddle3": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandMiddle4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandRing1": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandRing2": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandRing3": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandRing4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandPinky1": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandPinky2": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandPinky3": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftHandPinky4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightShoulder": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightArm": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightForeArm": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.8,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHand": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0002,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandPinky1": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandPinky2": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandPinky3": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandPinky4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandRing1": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandRing2": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandRing3": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandRing4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandMiddle1": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandMiddle2": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandMiddle3": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandMiddle4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandIndex1": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandIndex2": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandIndex3": {
+        "location": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandIndex4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandThumb1": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0001,
+            "y": 0.0001,
+            "z": -0.0001,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandThumb2": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandThumb3": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightHandThumb4": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftUpLeg": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftLeg": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftFoot": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0007,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftToeBase": {
+        "location": {
+            "x": -0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:LeftToe_End": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightUpLeg": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightLeg": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightFoot": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": -0.0007,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightToeBase": {
+        "location": {
+            "x": -0.0,
+            "y": -0.0,
+            "z": -0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": -0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    },
+    "mixamorig:RightToe_End": {
+        "location": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "rotation_quaternion": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+        }
+    }
+}

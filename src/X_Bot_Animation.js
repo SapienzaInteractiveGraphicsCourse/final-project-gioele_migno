@@ -12,6 +12,7 @@ class X_Bot_Animation{
         this.x_bot = _x_bot;
         this.utils = new Utils();
         this.array_animation = null;
+        this.loop = null;
     }
 
     _init_fix_component(component, x_bot_part){
@@ -27,7 +28,7 @@ class X_Bot_Animation{
         }
     }
 
-    _init_default_tween(component, x_bot_part, loop){
+    _init_default_tween(component, x_bot_part){
         if(x_bot_part.hasOwnProperty("_w")){
             component.func = (object) => {
                 x_bot_part.set(object.x, object.y, object.z, object.w);
@@ -46,10 +47,10 @@ class X_Bot_Animation{
                                             component.func, 
                                             TWEEN.Easing.Quadratic.None, 
                                             TWEEN.Interpolation.CatmullRom);
-        component.tween.init(loop);
+        component.tween.init(this.loop);
     }
 
-    _init_default(component, x_bot_part, loop){
+    _init_default(component, x_bot_part){
         const num_key_frames = component.animation.times.length;
 
         if(num_key_frames == 1){
@@ -59,17 +60,20 @@ class X_Bot_Animation{
             // nothing to do
         }
         else{
-            this._init_default_tween(component, x_bot_part, loop);
+            this._init_default_tween(component, x_bot_part);
         }
     }
 
-    _init_hips_quaternion(component, x_bot_part, loop){
+    _init_hips_quaternion(component, x_bot_part){
         const num_key_frames = component.animation.times.length;
         if( !(num_key_frames > 1)){
             return;
         }
         component.func = (object) => {
             x_bot_part.x = object.x;
+            //#############
+            x_bot_part.y = object.y;
+            //############
             x_bot_part.z = object.z;
         }
         component.enable = true;
@@ -77,10 +81,10 @@ class X_Bot_Animation{
                                             component.func, 
                                             TWEEN.Easing.Quadratic.None, 
                                             TWEEN.Interpolation.CatmullRom);
-        component.tween.init(loop);
+        component.tween.init(this.loop);
     }
 
-    _init_hips_position(component, x_bot_part, loop){
+    _init_hips_position(component, x_bot_part){
         const num_key_frames = component.animation.times.length;
         if( !(num_key_frames > 1)){
             return;
@@ -95,12 +99,12 @@ class X_Bot_Animation{
                                             component.func, 
                                             TWEEN.Easing.Quadratic.None, 
                                             TWEEN.Interpolation.CatmullRom);
-        component.tween.init(loop);
+        component.tween.init(this.loop);
     }
 
 
-    init(array_animation){
-
+    init(array_animation, loop){
+        this.loop = loop;
         this.array_animation = array_animation;
 
         // HIPS -------------------------------------------------------------------------------------------------
@@ -217,6 +221,7 @@ class X_Bot_Animation{
         this._init_default(this.array_animation.rightfoot_quaternion, this.x_bot.parts.right_foot.quaternion)
         this._init_default(this.array_animation.righttoebase_quaternion, this.x_bot.parts.right_toe_base.quaternion)
         // _____________________________________________________
+
     }
 
     start(){
