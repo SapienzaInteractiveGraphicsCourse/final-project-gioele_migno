@@ -374,8 +374,8 @@ class X_Bot{
         // let surface = 0xd6d6d6;
         // let joints = 0x010014;
 
-        this.materials.surface.material = new THREE.MeshPhongMaterial({color: surface_color}); 
-        this.materials.joints.material = new THREE.MeshPhongMaterial({color: joints_color});
+        this.materials.surface.material = new THREE.MeshPhongMaterial({color: surface_color, specular:surface_color, shininess:5}); 
+        this.materials.joints.material = new THREE.MeshPhongMaterial({color: joints_color, specular:joints_color, shininess:5});
     }
 
     __init(){

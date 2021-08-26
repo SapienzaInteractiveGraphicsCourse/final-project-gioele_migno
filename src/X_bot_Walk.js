@@ -157,6 +157,7 @@ class X_bot_Walk {
 
     keyup_dispatcher(name){
 
+        console.log(this.x_bot.model.position)
        //console.log(this._is_in_space(this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z));
         let rotation_y = this.x_bot.parts.armature.rotation.y;
         if(name == 'ArrowUp'){
@@ -185,8 +186,8 @@ class X_bot_Walk {
                 this.walk_animation_started = true;
                 this.walk_animation.start();
             }
-            
-            if(this._will_go_outside(10, this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z, this.x_bot.parts.armature.rotation.y)){
+            let step_will = 10;
+            if(this._will_go_outside(step_will, this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z, this.x_bot.parts.armature.rotation.y)){
                 this.hit_obstacle = true;
                 this.going_to_rest = true;
 
