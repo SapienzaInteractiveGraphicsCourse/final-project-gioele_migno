@@ -1,6 +1,6 @@
 class Utils {
 
-  // source three.js fundamentals
+  // source: three.js fundamentals
   dumpVec3(v3, precision = 3) {
     return `${v3.x.toFixed(precision)}, ${v3.y.toFixed(precision)}, ${v3.z.toFixed(precision)}`;
   }

@@ -1,6 +1,4 @@
-import { Vector4 } from '../build/three.module.js';
-import * as TWEEN from '../build/tween.esm.js';
-import * as THREE from '../build/three.module.js';
+import * as TWEEN from '../libs/tween_js/tween.esm.js';
 
 import { Tween_spline } from './Tween_spline.js'
 import { Utils } from './Utils.js'

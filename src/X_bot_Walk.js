@@ -1,9 +1,7 @@
-
-import { X_Bot } from './X_Bot.js'
 import { Linear_animation } from './Linear_animation.js'
 import { X_Bot_Walk_Animation } from './X_bot_Walk_Animation.js'
 import { X_bot_Interpolation_Configuartions } from './X_bot_Interpolation_Configuartions.js'
-import * as THREE from '../build/three.module.js';
+import * as THREE from '../libs/three_js/three.module.js';
 
 import { Utils } from './Utils.js'
 
@@ -157,7 +155,7 @@ class X_bot_Walk {
 
     keyup_dispatcher(name){
 
-        console.log(this.x_bot.model.position)
+        //console.log(this.x_bot.model.position)
        //console.log(this._is_in_space(this.x_bot.parts.armature.position.x, this.x_bot.parts.armature.position.z));
         let rotation_y = this.x_bot.parts.armature.rotation.y;
         if(name == 'ArrowUp'){

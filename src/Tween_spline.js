@@ -1,6 +1,4 @@
-import * as TWEEN from '../build/tween.esm.js';
-
-
+import * as TWEEN from '../libs/tween_js/tween.esm.js';
 
 class Tween_spline{
     constructor(times, values, handler_func, easing_func, interpolation_func){

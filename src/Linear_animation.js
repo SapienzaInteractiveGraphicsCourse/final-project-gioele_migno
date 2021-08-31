@@ -1,4 +1,4 @@
-import * as THREE from '../build/three.module.js';
+import * as THREE from '../libs/three_js/three.module.js';
 
 class Linear_animation{
     

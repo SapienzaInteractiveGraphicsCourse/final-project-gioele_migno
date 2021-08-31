@@ -1,5 +1,5 @@
-import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
-import * as THREE from '../build/three.module.js';
+import { GLTFLoader } from '../libs/loaders/GLTFLoader.js';
+import * as THREE from '../libs/three_js/three.module.js';
 
 
 class X_Bot{
@@ -12,7 +12,7 @@ class X_Bot{
         this.scene = null;
 
         this.parts = {
-            //armature : null,
+            armature : null,
 
             hips : null,
             
@@ -258,7 +258,7 @@ class X_Bot{
             // LEFT UPPER LIMBS ------------------------------------
             leftshoulder_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0},
             
-            leftarm_quaternion: {x: 0.0, y: 0.0, z:-0.6, w: 1.0},
+            leftarm_quaternion: {x: 0.0, y: 0.0, z:-0.57346234436332832659922809930443, w: 0.81923192051904046657032585614919},
             
             leftforearm_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0},
             // ______________________________________________________
@@ -294,7 +294,7 @@ class X_Bot{
             // RIGHT UPPER LIMBS ------------------------------------
             rightshoulder_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0},
             
-            rightarm_quaternion: {x: 0.0, y: 0.0, z:0.6, w: 1.0},
+            rightarm_quaternion:  {x: 0.0, y: 0.0, z:0.57346234436332832659922809930443, w: 0.81923192051904046657032585614919},
             
             //fore arm
             rightforearm_quaternion: {x: 0.0, y: 0.0, z:0.0, w: 1.0},

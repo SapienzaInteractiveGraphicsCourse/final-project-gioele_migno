@@ -1,50 +1,34 @@
-
-import { X_Bot } from './X_Bot.js'
-import { Linear_animation } from './Linear_animation.js'
-import { X_Bot_Walk_Animation } from './X_bot_Walk_Animation.js'
 import { X_bot_Interpolation_Configuartions } from './X_bot_Interpolation_Configuartions.js'
-import * as THREE from '../build/three.module.js';
 import { Tween_spline } from './Tween_spline.js'
-import * as TWEEN from '../build/tween.esm.js';
+import * as TWEEN from '../libs/tween_js/tween.esm.js';
 
 import { Utils } from './Utils.js'
 
         
-class X_Bot_Cube_Animation {
+class X_Bot_Sphere_Animation {
 
     constructor(x_bot, env){
         this.x_bot = x_bot;
         this.utils = new Utils();
     
         this.env = env; 
-        this.A = null;
-        this.B = null;
-        this.C = null;
+
         this.array_config = null;
         this.array_times = null;
         this.animation = null;
-
-        this.array_config = null;
 
         this.obj_tween = null;
     }
   
     init(){
 
-        this._init_array()
+        this._init_array();
         
         this.func = (object) => {
-            //console.log(this.env.object_to_move.position)
             this.env.object_to_move.position.set(object.x, object.y, object.z);
         }
 
-
-
         this.animation = new X_bot_Interpolation_Configuartions(this.x_bot);
-        let times = [0, 1000, 2000, 3000, 4000, 
-                  6000, 8000, 9000, 10000, 14000, 
-                  16000, 18000, 20000, 21000, 22000,
-                24000, 26000, 28000, 30000]
         let time = [];
         let step= 500;
         for(let i = 0; i<28; i++){
@@ -93,27 +77,38 @@ class X_Bot_Cube_Animation {
 
         ];
         
-        this.object_time = time.slice(0,this.object_pos.length);
-
+        this.object_time = time;
         this.obj_tween = new Tween_spline(this.object_time, this.object_pos, 
                                         this.func, 
                                         TWEEN.Easing.Quadratic.None, 
                                         TWEEN.Interpolation.CatmullRom);
-        //console.log(JSON.stringify(this.obj_tween))
         this.obj_tween.init(true);
-        //console.log(JSON.stringify(this.obj_tween))
 
+        // this.animation.start();
+        // this.obj_tween.start();
+    }
+
+
+    start(){
         this.animation.start();
         this.obj_tween.start();
     }
 
+    stop(){
+        this.animation.stop();
+        this.obj_tween.stop();
+    }
+
+    reset(){
+        this.animation.reset();
+        this.obj_tween.reset();
+    }
 
     update(){
         this.animation.update();
         
         this.obj_tween.update();
-        //console.log(this.x_bot.parts.spine.quaternion)
-        //this.x_bot.set_configuration(this.array_config[7]);
+
         this.x_bot.parts.hips.position.y = 65
     }
 
@@ -11575,4 +11570,4 @@ class X_Bot_Cube_Animation {
     }
 
 };
-export { X_Bot_Cube_Animation };
+export { X_Bot_Sphere_Animation };
