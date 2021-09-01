@@ -344,7 +344,7 @@ class Environment{
     
             new THREE.MeshPhongMaterial({color: 0xF0F8FF}),
             // source gear https://www.subpng.com/png-2onktf/download.html
-            new THREE.MeshPhongMaterial({map: loader.load('./textures/logo.png')}),
+            new THREE.MeshPhongMaterial({map: loader.load('src/textures/logo.png')}),
     
             new THREE.MeshPhongMaterial({color: 0xF0F8FF}),
         ];
@@ -356,20 +356,20 @@ class Environment{
     _init_carpet(main_scene){
         const loader = new THREE.TextureLoader();
     
-        const base_color_map = loader.load('./textures/carpet/Fabric_Knitted_004_basecolor.jpg')
+        const base_color_map = loader.load('src/textures/carpet/Fabric_Knitted_004_basecolor.jpg')
         this._set_repeat_texture(base_color_map)
     
-        const normal_map = loader.load('./textures/carpet/Fabric_Knitted_004_normal.jpg')
+        const normal_map = loader.load('src/textures/carpet/Fabric_Knitted_004_normal.jpg')
         this._set_repeat_texture(normal_map)
     
-        const height_map = loader.load('./textures/carpet/Fabric_Knitted_004_height.png')
+        const height_map = loader.load('src/textures/carpet/Fabric_Knitted_004_height.png')
         this._set_repeat_texture(height_map)
     
-        const roughness_map = loader.load('./textures/carpet/Fabric_Knitted_004_roughness.jpg')
+        const roughness_map = loader.load('src/textures/carpet/Fabric_Knitted_004_roughness.jpg')
         this._set_repeat_texture(roughness_map)
     
     
-        const ambent_occlusion = loader.load('./textures/carpet/Fabric_Knitted_004_ambientOcclusion.jpg')
+        const ambent_occlusion = loader.load('src/textures/carpet/Fabric_Knitted_004_ambientOcclusion.jpg')
         this._set_repeat_texture(ambent_occlusion)
     
         

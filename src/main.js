@@ -10,8 +10,8 @@ import { OrbitControls } from '../libs/human_interface/OrbitControls.js';
 
 let camera, scene, renderer, stats;
 
-const X_BOT_PATH_MODEL = './models/x_bot_rotated.glb';
-const ENV_PATH_MODEL = './models/room.glb';
+const X_BOT_PATH_MODEL = './src/models/x_bot_rotated.glb';
+const ENV_PATH_MODEL = './src/models/room.glb';
 
 
 let x_bot;
